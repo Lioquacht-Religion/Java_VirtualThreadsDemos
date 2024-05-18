@@ -1,4 +1,4 @@
-package demo.virtualthreads;
+package demo.virtualthreads.comparisons;
 
 public class ThreadsCrashTest {
 	

@@ -1,12 +1,11 @@
-package demo.virtualthreads;
+package demo.virtualthreads.comparisons;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ThreadsCreationTimeTest {
 	static final int MAX_THREADS_NUM = 20_000;
-	public static void main(String[] args) {
-		
+	public static void main(String[] args) {		
 		System.out.println("vthreads time: " + vthreadCreationTime() + "ms; pthreads time: " + pthreadCreationTime() + "ms;");
 	}
 	
@@ -22,13 +21,11 @@ public class ThreadsCreationTimeTest {
 		}
 		
 		long delta_time = System.currentTimeMillis() - start_time_vthreads;
-		//System.out.println("creation of " + MAX_THREADS_NUM + " Virtual THreads took: " + delta_time);
 		
 		vthreads.forEach( t -> {
 			try {
 				t.join();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		});
@@ -47,10 +44,7 @@ public class ThreadsCreationTimeTest {
 		}
 		
 		long delta_time_pthreads = System.currentTimeMillis() - start_time_pthreads;
-		//System.out.println("creation of " + MAX_THREADS_NUM + " Platform Threads took: " + delta_time_pthreads);
 		return delta_time_pthreads;
 	}
 	
-	
-
 }

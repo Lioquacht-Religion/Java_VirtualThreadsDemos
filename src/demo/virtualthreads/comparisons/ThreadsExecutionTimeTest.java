@@ -1,11 +1,7 @@
-package demo.virtualthreads;
+package demo.virtualthreads.comparisons;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class ThreadsExecutionTimeTest {
 	static final int MAX_THREAD_NUM = 20_000;
@@ -29,7 +25,6 @@ public class ThreadsExecutionTimeTest {
 	    		try {
 					Thread.sleep(1_000);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 	    		System.out.println(task_text + " ended");
@@ -41,7 +36,6 @@ public class ThreadsExecutionTimeTest {
 	    	try {
 				t.join();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	    });
@@ -61,7 +55,6 @@ public class ThreadsExecutionTimeTest {
 	    		try {
 					Thread.sleep(1_000);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 	    		System.out.println(task_text + " ended");
@@ -73,7 +66,6 @@ public class ThreadsExecutionTimeTest {
 	    	try {
 				t.join();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	    });
