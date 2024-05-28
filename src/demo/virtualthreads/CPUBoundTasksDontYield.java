@@ -16,7 +16,7 @@ public class CPUBoundTasksDontYield {
 	    // Start 10 virtual threads
 	    long start = System.currentTimeMillis();
 	    try (ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()) {
-	      for (int i = 0; i < 20; i++) {
+	      for (int i = 0; i < 10; i++) {
 	        executorService.submit(CPUBoundTasksDontYield::makeCpuBusy);
 	      }
 	    }
