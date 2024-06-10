@@ -1,4 +1,4 @@
-package demo.virtualthreads.clientserverexample;
+package demo.virtualthreads.clientserverexample.web;
 
 import java.io.BufferedReader;
 import java.io.IOException;
