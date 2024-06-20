@@ -12,8 +12,8 @@ public class VthreadsLocalServer {
 	public VthreadsLocalServer() {
 	}
 	
-	public void sendEchoClientMessage(ClientMessage mssg) {
-		this.recvMessageQueue.add(mssg);
+	public boolean sendEchoClientMessage(ClientMessage mssg) {
+		return this.recvMessageQueue.offer(mssg);
 	}
 	
 	public void start() {
@@ -22,7 +22,7 @@ public class VthreadsLocalServer {
 			try {
 				ClientMessage mssg = this.recvMessageQueue.poll(60, TimeUnit.SECONDS);
 				exec.execute(() -> {
-					mssg.client.recvMessageQueue.add("ServerEcho: " + mssg.message);
+					mssg.client.recieveMessage("ServerEcho: " + mssg.message);
 				});
 				if (mssg.message.equals("bye")) break;
 			} catch (InterruptedException e) {

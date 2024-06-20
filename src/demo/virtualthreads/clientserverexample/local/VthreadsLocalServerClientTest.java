@@ -10,6 +10,11 @@ public class VthreadsLocalServerClientTest {
 				server.start();
 		});
 		
+		VthreadsAutoLocalClient autoClient = new VthreadsAutoLocalClient(server);
+		Thread.ofPlatform().start(() -> {autoClient.start();});
+		VthreadsAutoLocalClient autoClient2 = new VthreadsAutoLocalClient(server);
+		Thread.ofPlatform().start(() -> {autoClient2.start();});
+		
 		VthreadsLocalClient client = new VthreadsLocalClient(server);
 		client.start();
 

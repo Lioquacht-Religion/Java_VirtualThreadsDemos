@@ -1,11 +1,11 @@
 package demo.virtualthreads.clientserverexample.local;
 
 public class ClientMessage {
-	VthreadsLocalClient client;
+	LocalClient client;
 	String message;
 	
-	public ClientMessage (VthreadsLocalClient client, String message){
-		this.client = client;
+	public ClientMessage (LocalClient localClient, String message){
+		this.client = localClient;
 		this.message = message;
 	}
 

@@ -3,17 +3,14 @@ package demo.virtualthreads.clientserverexample.local;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-public class VthreadsLocalClient {
+public class VthreadsLocalClient implements LocalClient{
 	
 	private VthreadsLocalServer server = null;
-	public BlockingQueue<String> recvMessageQueue = new ArrayBlockingQueue<String>(10);
+	public BlockingQueue<String> recvMessageQueue = new LinkedBlockingQueue<String>();
 	
 	public VthreadsLocalClient() {
 	}
@@ -30,7 +27,11 @@ public class VthreadsLocalClient {
 	            String userInput;
 	            try (BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));){
 					while ((userInput = stdIn.readLine()) != null) {
-						this.server.sendEchoClientMessage(new ClientMessage(this, userInput));
+						boolean success = this.server.sendEchoClientMessage(new ClientMessage(this, userInput));
+						if(!success) {
+							System.out.println("Server kann keine Anfragen mehr annehmen, versuche es später");
+							continue;
+						}
 					    String recvMssg = this.recvMessageQueue.poll(60, TimeUnit.SECONDS);
 					    if (recvMssg != null) {
 						    System.out.println("echo: " + recvMssg);
@@ -45,6 +46,11 @@ public class VthreadsLocalClient {
 				}
 		
 		
+	}
+
+	@Override
+	public boolean recieveMessage(String message) {
+		return this.recvMessageQueue.offer(message);
 	}
 	
 
